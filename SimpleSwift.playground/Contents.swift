@@ -1,11 +1,62 @@
+import Foundation
+
 print("Welcome to the UW Calculator Playground")
 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    let function = args[args.count - 1]
+    
+    switch function {
+    case "count":
+        var count = 0
+        if args.count != 1 {
+            for _ in 0...(args.count - 2) {
+                count += 1
+            }
+        }
+        return count
+    case "avg":
+        var count = 0
+        if args.count != 1 {
+            for i in 0...(args.count - 2) {
+                count += Int(args[i])!
+            }
+            return count / (args.count - 1)
+        }
+        return 0
+    case "fact":
+        if args[0] == "0" {
+            return 1
+        }
+        else if args.count != 1 {
+            var results = 1
+            for i in 1...Int(args[0])! {
+                results *= i
+            }
+            return results
+        }
+        return 0
+    default:
+        let operand = args[1]
+        switch operand {
+        case "+":
+            return Int(args[0])! + Int(args[2])!
+        case "-":
+            return Int(args[0])! - Int(args[2])!
+        case "*":
+            return Int(args[0])! * Int(args[2])!
+        case "/":
+            return Int(args[0])! / Int(args[2])!
+        case "%":
+            return Int(args[0])! % Int(args[2])!
+        default:
+            return -1
+        }
+    }
+    // check what the last value is to determine what to do
 }
 
 func calculate(_ arg: String) -> Int {
-    return -1
+    return calculate(arg.components(separatedBy: " "))
 }
 
 // -------------------------------------------
@@ -53,7 +104,7 @@ calculate("5 fact") == 120
 
 // Implement calculate([String]) and calculate(String)
 // to handle negative numbers
-/*
+
 calculate(["2", "+", "-2"]) == 0
 calculate(["2", "-", "-2"]) == 4
 calculate(["2", "*", "-2"]) == -4
@@ -68,7 +119,7 @@ calculate("2 - -2") == 4
 calculate("-2 / 2") == -1
 
 calculate("1 -2 3 -4 5 count") == 5
-*/
+
  
 // Implement calculate([String]) and calculate(String)
 // to use floating-point values
